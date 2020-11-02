@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,20 +11,18 @@
         android:id="@+id/bg"
         android:layout_width="match_parent"
         android:layout_height="246dp"
-        android:background="@mipmap/bg_home"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@mipmap/bg_home"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/bg"
         android:id="@+id/list"
-        app:layout_constraintTop_toBottomOf="@+id/bg"
         android:layout_width="match_parent"
         android:layout_marginHorizontal="10dp"
         android:layout_height="wrap_content"
+        android:scrollbars="vertical"
         tools:listitem="@layout/list_item">
 
     </androidx.recyclerview.widget.RecyclerView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
