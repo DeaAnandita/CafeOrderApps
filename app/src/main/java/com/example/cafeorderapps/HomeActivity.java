@@ -22,7 +22,7 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.list);
 
         homeModels = new ArrayList<>();
-        homeModels.add(new HomeModel("1", "Mochachino", "15.000,-"));
+        homeModels.add(new HomeModel("1", "Mochaccino", "15.000,-"));
         homeModels.add(new HomeModel("2","Susu Caramel", "15.000,-"));
         homeModels.add(new HomeModel("3","Espresso", "15.000,-"));
         homeModels.add(new HomeModel("4","Macchiato", "15.000,-"));

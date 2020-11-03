@@ -10,51 +10,60 @@
 
     <ImageView
         android:id="@+id/bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/coffee"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_width="413dp"
-        android:layout_height="681dp"
-        android:background="@mipmap/cafe_bg" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_manager"
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Login to continue!"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="wrap_content"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:layout_marginTop="160dp"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="200dp">
+
+        <EditText
+            android:id="@+id/edUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginBottom="230dp"
-        android:background="@drawable/btnlogin"
-        android:text="masuk sebagai manager"
-        app:layout_constraintBottom_toBottomOf="@+id/bg"/>
+        app:layout_constraintTop_toBottomOf="@+id/username"
+        android:layout_margin="20dp">
+
+        <EditText
+            android:id="@+id/edPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btn_kasir"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginBottom="158dp"
-        android:background="@drawable/btnlogin"
-        android:text="masuk sebagai kasir"
-        app:layout_constraintBottom_toBottomOf="@+id/bg"/>
-
-    <Button
-        android:id="@+id/btn_koki"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginBottom="88dp"
-        android:background="@drawable/btnlogin"
-        android:text="masuk sebagai koki"
-        app:layout_constraintBottom_toBottomOf="@+id/bg" />
-
-    <Button
-        android:id="@+id/btn_pelayan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
-        android:background="@drawable/btnlogin"
-        android:layout_marginBottom="20dp"
-        android:text="masuk sebagai pelayan"
-        app:layout_constraintBottom_toBottomOf="@+id/bg"/>
+        app:layout_constraintTop_toBottomOf="@+id/password"
+        android:layout_margin="20dp"
+        android:textColor="@color/white"
+        android:text="LOGIN"
+        android:background="@drawable/btn_login"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
