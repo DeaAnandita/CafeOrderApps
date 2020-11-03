@@ -1,10 +1,10 @@
 package com.example.cafeorderapps;
 
-<<<<<<< HEAD
+
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-=======
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import java.util.ArrayList;
->>>>>>> 6ff4a1340b166c5c883bf38ee8824e66b3920097
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -26,8 +25,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-<<<<<<< HEAD
-=======
         recyclerView = findViewById(R.id.list);
 
         homeModels = new ArrayList<>();
@@ -42,7 +39,6 @@ public class HomeActivity extends AppCompatActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(homeAdapter);
->>>>>>> 6ff4a1340b166c5c883bf38ee8824e66b3920097
 
     }
 }
