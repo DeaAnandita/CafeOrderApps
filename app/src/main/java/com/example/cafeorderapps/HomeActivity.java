@@ -1,16 +1,15 @@
 package com.example.cafeorderapps;
 
-
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
 
 import java.util.ArrayList;
 
@@ -28,12 +27,12 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.list);
 
         homeModels = new ArrayList<>();
-        homeModels.add(new HomeModel("1", "Nama1", "email1@gmail.com"));
-        homeModels.add(new HomeModel("2","Nama2", "email2@gmail.com"));
-        homeModels.add(new HomeModel("3","Nama3", "email3@gmail.com"));
-        homeModels.add(new HomeModel("4","Nama4", "email4@gmail.com"));
-        homeModels.add(new HomeModel("5","Nama5", "email5@gmail.com"));
-        homeModels.add(new HomeModel("6","Nama6", "email6@gmail.com"));
+        homeModels.add(new HomeModel("1", "Mochaccino", "15.000,-"));
+        homeModels.add(new HomeModel("2","Susu Caramel", "15.000,-"));
+        homeModels.add(new HomeModel("3","Espresso", "15.000,-"));
+        homeModels.add(new HomeModel("4","Macchiato", "15.000,-"));
+        homeModels.add(new HomeModel("5","Choco Latte", "15.000,-"));
+        homeModels.add(new HomeModel("6","Americano", "15.000,-"));
 
         homeAdapter = new HomeAdapter(homeModels);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);

@@ -3,6 +3,7 @@ package com.example.cafeorderapps;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,6 +42,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     class HomeViewHolder extends RecyclerView.ViewHolder{
         private TextView txtEmail, txtnama;
+        private ImageView img;
         CardView cardku;
 
         HomeViewHolder(View itemView) {
@@ -48,6 +50,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             cardku = itemView.findViewById(R.id.cardku);
             txtEmail = itemView.findViewById(R.id.txtemail);
             txtnama = itemView.findViewById(R.id.txtnama);
+            img = itemView.findViewById(R.id.image);
 
         }
     }

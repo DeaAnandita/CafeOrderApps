@@ -15,17 +15,5 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        btnManager = findViewById(R.id.btn_manager);
-        btnKasir = findViewById(R.id.btn_kasir);
-        btnKoki = findViewById(R.id.btn_koki);
-        btnPelayan = findViewById(R.id.btn_pelayan);
-
-        btnPelayan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, HomeActivity.class));
-            }
-        });
     }
 }
