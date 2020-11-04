@@ -26,7 +26,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="151dp"
                     android:gravity="center"
-                    android:src="@mipmap/cafe_bg" />
+                    android:src="@mipmap/icon" />
 
                 <TextView
                     android:id="@+id/txtemail"

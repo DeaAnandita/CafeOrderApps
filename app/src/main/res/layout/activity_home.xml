@@ -20,8 +20,20 @@
         android:layout_marginHorizontal="10dp"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
+        android:paddingBottom="60dp"
         tools:listitem="@layout/list_item">
-
     </androidx.recyclerview.widget.RecyclerView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigationView"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        app:itemBackground="@color/colorPrimary"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:menu="@menu/navigation"
+        />
 
 </RelativeLayout>
