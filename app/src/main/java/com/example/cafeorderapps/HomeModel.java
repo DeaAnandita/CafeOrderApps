@@ -8,6 +8,7 @@ public class HomeModel {
         this.id = id;
         this.email = email;
         this.nama = nama;
+
     }
 
     public String getId() {
