@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/navigation_songs"
-        android:icon="@mipmap/icon"
-        android:title="Makanan"/>
+        android:icon="@mipmap/cocktail"
+        android:title="Minuman"/>
 
     <item
         android:id="@+id/navigation_albums"
-        android:icon="@mipmap/icon"
+        android:icon="@mipmap/tray"
         android:title="Keranjang"/>
 
     <item
         android:id="@+id/navigation_artists"
-        android:icon="@mipmap/icon"
-        android:title="Minuman"/>
+        android:icon="@mipmap/food"
+        android:title="Makanan"/>
 
 </menu>

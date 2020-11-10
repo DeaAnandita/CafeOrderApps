@@ -63,7 +63,7 @@
     <Button
         android:layout_width="160dp"
         android:background="@drawable/btn_login"
-        android:layout_height="48dp"
+        android:layout_height="45dp"
         android:text="Tambah Pesanan"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/rvDetail"

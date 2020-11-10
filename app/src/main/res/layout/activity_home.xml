@@ -7,19 +7,64 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-    <ImageView
-        android:id="@+id/bg"
-        android:layout_width="match_parent"
-        android:layout_height="246dp"
-        android:background="@mipmap/bg_home"/>
+                <ImageView
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:id="@+id/bg"
+                    app:layout_constraintTop_toBottomOf="@+id/etSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="246dp"
+                    android:layout_below="@+id/etSearch"
+                    android:background="@mipmap/bg_home"/>
+
+                <EditText
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:id="@+id/etSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:padding="10dp"
+                    android:textColor="@color/white"
+                    android:drawableLeft="@drawable/ic_baseline_search_24"
+                    android:background="@color/colorPrimaryDark"
+                    android:drawablePadding="15dp"
+                    android:textColorHint="@color/white"
+                    android:hint="Search"/>
+
+
+
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:scrollbars="horizontal"-->
+<!--        android:layout_below="@+id/bg">-->
+<!--    </androidx.recyclerview.widget.RecyclerView>-->
+
+<!--    <View-->
+<!--        android:layout_width="65dp"-->
+<!--        android:layout_height="65dp"-->
+<!--        android:layout_below="@+id/bg"-->
+<!--        android:layout_marginHorizontal="20dp"-->
+<!--        android:background="@drawable/circlebg"-->
+<!--        android:layout_marginVertical="15dp" />-->
+
+<!--    <de.hdodenhof.circleimageview.CircleImageView-->
+<!--        xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--        android:id="@+id/profile_image"-->
+<!--        android:layout_width="96dp"-->
+<!--        android:layout_height="96dp"-->
+<!--        android:src="@mipmap/bg_home"-->
+<!--        android:layout_below="@+id/bg"-->
+<!--        app:civ_border_width="2dp"-->
+<!--        app:civ_border_color="#FF000000"/>-->
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@id/bg"
         android:id="@+id/list"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_marginHorizontal="10dp"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
+        android:layout_below="@id/bg"
         android:paddingBottom="60dp"
         tools:listitem="@layout/list_item">
     </androidx.recyclerview.widget.RecyclerView>
@@ -33,7 +78,6 @@
         app:itemBackground="@color/colorPrimary"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
-        app:menu="@menu/navigation"
-        />
+        app:menu="@menu/navigation" />
 
 </RelativeLayout>
