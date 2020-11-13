@@ -5,75 +5,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".HomeActivity">
 
-                <ImageView
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:id="@+id/bg"
-                    app:layout_constraintTop_toBottomOf="@+id/etSearch"
-                    android:layout_width="match_parent"
-                    android:layout_height="246dp"
-                    android:layout_below="@+id/etSearch"
-                    android:background="@mipmap/bg_home"/>
+    <EditText
+        android:id="@+id/etSearch"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimaryDark"
+        android:drawableLeft="@drawable/ic_baseline_search_24"
+        android:drawablePadding="15dp"
+        android:hint="Search"
+        android:drawableRight="@drawable/ic_baseline_menu_24"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:id="@+id/etSearch"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:padding="10dp"
-                    android:textColor="@color/white"
-                    android:drawableLeft="@drawable/ic_baseline_search_24"
-                    android:background="@color/colorPrimaryDark"
-                    android:drawablePadding="15dp"
-                    android:textColorHint="@color/white"
-                    android:hint="Search"/>
+    <FrameLayout
+        android:layout_below="@+id/etSearch"
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        tools:ignore="Suspicious0dp">
 
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rootView"
+        android:fillViewport="true"
+        android:layout_below="@+id/etSearch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+    <ImageView
+        android:id="@+id/bg"
+        android:layout_width="match_parent"
+        android:layout_height="246dp"
+        android:background="@mipmap/home_bg"
+        app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:scrollbars="horizontal"-->
-<!--        android:layout_below="@+id/bg">-->
-<!--    </androidx.recyclerview.widget.RecyclerView>-->
+    <TextView
+        android:id="@+id/tvkategori"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kategori :"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/bg"
+        android:textColor="@color/colorPrimaryDark"/>
 
-<!--    <View-->
-<!--        android:layout_width="65dp"-->
-<!--        android:layout_height="65dp"-->
-<!--        android:layout_below="@+id/bg"-->
-<!--        android:layout_marginHorizontal="20dp"-->
-<!--        android:background="@drawable/circlebg"-->
-<!--        android:layout_marginVertical="15dp" />-->
-
-<!--    <de.hdodenhof.circleimageview.CircleImageView-->
-<!--        xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--        android:id="@+id/profile_image"-->
-<!--        android:layout_width="96dp"-->
-<!--        android:layout_height="96dp"-->
-<!--        android:src="@mipmap/bg_home"-->
-<!--        android:layout_below="@+id/bg"-->
-<!--        app:civ_border_width="2dp"-->
-<!--        app:civ_border_color="#FF000000"/>-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvkategori"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:visibility="visible"
+        android:layout_marginHorizontal="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvkategori"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/listitem_categori" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
-        android:layout_marginTop="20dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="10dp"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        android:layout_below="@id/bg"
+        android:layout_below="@id/rvkategori"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
         android:paddingBottom="60dp"
+        android:scrollbars="vertical"
         tools:listitem="@layout/list_item">
+
     </androidx.recyclerview.widget.RecyclerView>
+        </RelativeLayout>
+    </ScrollView>
+
+    </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigationView"
         android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:background="?android:attr/windowBackground"
         app:itemBackground="@color/colorPrimary"
         app:itemIconTint="@color/white"

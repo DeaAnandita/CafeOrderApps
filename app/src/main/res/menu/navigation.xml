@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_songs"
+        android:id="@+id/nav_drink"
         android:icon="@mipmap/cocktail"
         android:title="Minuman"/>
 
     <item
-        android:id="@+id/navigation_albums"
+        android:id="@+id/nav_cart"
         android:icon="@mipmap/tray"
         android:title="Keranjang"/>
 
     <item
-        android:id="@+id/navigation_artists"
+        android:id="@+id/nav_food"
         android:icon="@mipmap/food"
         android:title="Makanan"/>
 
