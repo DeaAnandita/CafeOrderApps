@@ -34,6 +34,7 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView1 = findViewById(R.id.rvkategori);
         navigationView.setOnNavigationItemSelectedListener(selectedListener);
 
+
         categoriModels = new ArrayList<>();
         categoriModels.add(new CategoriModel("1", "Mochaccino"));
         categoriModels.add(new CategoriModel("2", "Susu"));
@@ -79,7 +80,6 @@ public class HomeActivity extends AppCompatActivity {
                     }
 
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
-
                     return true;
                 }
             };

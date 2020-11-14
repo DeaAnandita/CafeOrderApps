@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -24,35 +26,36 @@ public class DrinkFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.drink_fragment, container, true);
-//
-//        recyclerView = recyclerView.findViewById(R.id.list);
-//        recyclerView1 = recyclerView1.findViewById(R.id.rvkategori);
-//
-//        categoriModels = new ArrayList<>();
-//        categoriModels.add(new CategoriModel("1", "Mochaccino"));
-//        categoriModels.add(new CategoriModel("2", "Susu"));
-//        categoriModels.add(new CategoriModel("3", "Espresso"));
-//        categoriModels.add(new CategoriModel("4", "Macchiato"));
-//        categoriModels.add(new CategoriModel("5", "Choco"));
-//        categoriModels.add(new CategoriModel("6", "Americano"));
-//        categoriAdapter = new CategoriAdapter(categoriModels);
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-//        recyclerView1.setLayoutManager(layoutManager);
-//        recyclerView1.setAdapter(categoriAdapter);
-//
-//        homeModels = new ArrayList<>();
-//        homeModels.add(new HomeModel("1", "Mochaccino", "15.000,-"));
-//        homeModels.add(new HomeModel("2", "Susu Caramel", "15.000,-"));
-//        homeModels.add(new HomeModel("3", "Espresso", "15.000,-"));
-//        homeModels.add(new HomeModel("4", "Macchiato", "15.000,-"));
-//        homeModels.add(new HomeModel("5", "Choco Latte", "15.000,-"));
-//        homeModels.add(new HomeModel("6", "Americano", "15.000,-"));
-//
-//        homeAdapter = new HomeAdapter(homeModels);
-//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-//        recyclerView.setLayoutManager(gridLayoutManager);
-//        recyclerView.setAdapter(homeAdapter);
+        View view = inflater.inflate(R.layout.drink_fragment, container, false);
 
+        recyclerView = view.findViewById(R.id.list_fragment);
+        recyclerView1 = view.findViewById(R.id.rvkategori_fragment);
+
+        categoriModels = new ArrayList<>();
+        categoriModels.add(new CategoriModel("1", "Mochaccino"));
+        categoriModels.add(new CategoriModel("2", "Susu"));
+        categoriModels.add(new CategoriModel("3", "Espresso"));
+        categoriModels.add(new CategoriModel("4", "Macchiato"));
+        categoriModels.add(new CategoriModel("5", "Choco"));
+        categoriModels.add(new CategoriModel("6", "Americano"));
+        categoriAdapter = new CategoriAdapter(categoriModels);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView1.setLayoutManager(layoutManager);
+        recyclerView1.setAdapter(categoriAdapter);
+
+        homeModels = new ArrayList<>();
+        homeModels.add(new HomeModel("1", "Mochaccino", "15.000,-"));
+        homeModels.add(new HomeModel("2", "Susu Caramel", "15.000,-"));
+        homeModels.add(new HomeModel("3", "Espresso", "15.000,-"));
+        homeModels.add(new HomeModel("4", "Macchiato", "15.000,-"));
+        homeModels.add(new HomeModel("5", "Choco Latte", "15.000,-"));
+        homeModels.add(new HomeModel("6", "Americano", "15.000,-"));
+
+        homeAdapter = new HomeAdapter(homeModels);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(homeAdapter);
+
+        return view;
     }
 }

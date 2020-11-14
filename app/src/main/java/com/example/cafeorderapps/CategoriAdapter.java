@@ -24,7 +24,7 @@ public class CategoriAdapter extends RecyclerView.Adapter<CategoriAdapter.HomeVi
     @Override
     public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        viewku = layoutInflater.inflate(R.layout.listitem_categori, parent, false);
+        viewku = layoutInflater.inflate(R.layout.listitem_categori_fragment, parent, false);
         return new HomeViewHolder(viewku);
     }
 
