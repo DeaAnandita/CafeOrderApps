@@ -8,22 +8,36 @@
     android:background="@color/colorPrimaryDark"
     tools:context=".HomeActivity">
 
-    <EditText
-        android:id="@+id/etSearch"
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimaryDark"
-        android:drawableLeft="@drawable/ic_baseline_search_24"
-        android:drawablePadding="15dp"
-        android:hint="Search"
-        android:drawableRight="@drawable/ic_baseline_menu_24"
-        android:padding="10dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        tools:targetApi="lollipop">
+
+        <include
+            android:id="@+id/toolbar1"
+            layout="@layout/my_toolbar" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+<!--    <EditText-->
+<!--        android:id="@+id/etSearch"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:background="@color/colorPrimaryDark"-->
+<!--        android:drawableLeft="@drawable/ic_baseline_search_24"-->
+<!--        android:drawablePadding="15dp"-->
+<!--        android:hint="Search"-->
+<!--        android:drawableRight="@drawable/ic_baseline_menu_24"-->
+<!--        android:padding="10dp"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textColorHint="@color/white"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <FrameLayout
-        android:layout_below="@+id/etSearch"
+        android:layout_below="@+id/appbar"
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

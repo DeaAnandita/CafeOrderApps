@@ -5,6 +5,9 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cafeorderapps.Adapter.DetailAdapter;
+import com.example.cafeorderapps.Model.DetailModel;
+
 import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity {

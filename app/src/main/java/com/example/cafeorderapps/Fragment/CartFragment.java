@@ -1,4 +1,4 @@
-package com.example.cafeorderapps;
+package com.example.cafeorderapps.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.cafeorderapps.Adapter.DetailAdapter;
+import com.example.cafeorderapps.Model.DetailModel;
+import com.example.cafeorderapps.R;
 
 import java.util.ArrayList;
 

@@ -5,11 +5,19 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cafeorderapps.Adapter.CategoriAdapter;
+import com.example.cafeorderapps.Adapter.HomeAdapter;
+import com.example.cafeorderapps.Fragment.CartFragment;
+import com.example.cafeorderapps.Fragment.DrinkFragment;
+import com.example.cafeorderapps.Fragment.FoodFragment;
+import com.example.cafeorderapps.Model.CategoriModel;
+import com.example.cafeorderapps.Model.HomeModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -28,12 +36,18 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         BottomNavigationView navigationView = findViewById(R.id.navigationView);
 
         recyclerView = findViewById(R.id.list);
         recyclerView1 = findViewById(R.id.rvkategori);
         navigationView.setOnNavigationItemSelectedListener(selectedListener);
 
+        homeModels = new ArrayList<>();
+        homeAdapter = new HomeAdapter(homeModels);
+        recyclerView.setAdapter(homeAdapter);
 
         categoriModels = new ArrayList<>();
         categoriModels.add(new CategoriModel("1", "Mochaccino"));
@@ -70,6 +84,7 @@ public class HomeActivity extends AppCompatActivity {
                     switch (menuItem.getItemId()) {
                         case R.id.nav_drink:
                             selectedFragment = new DrinkFragment();
+
                             break;
                         case R.id.nav_cart:
                             selectedFragment = new CartFragment();

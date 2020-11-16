@@ -1,4 +1,4 @@
-package com.example.cafeorderapps;
+package com.example.cafeorderapps.Model;
 
 public class CategoriModel {
     String id, txtNamaCatg;
