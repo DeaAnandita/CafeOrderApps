@@ -84,7 +84,6 @@ public class HomeActivity extends AppCompatActivity {
                     switch (menuItem.getItemId()) {
                         case R.id.nav_drink:
                             selectedFragment = new DrinkFragment();
-
                             break;
                         case R.id.nav_cart:
                             selectedFragment = new CartFragment();
