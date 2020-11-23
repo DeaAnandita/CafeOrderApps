@@ -1,10 +1,15 @@
 package com.example.cafeorderapps;
 
+import android.annotation.SuppressLint;
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -12,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cafeorderapps.Adapter.CategoriAdapter;
+import com.example.cafeorderapps.Adapter.DataFilterAdapter;
 import com.example.cafeorderapps.Adapter.HomeAdapter;
 import com.example.cafeorderapps.Fragment.CartFragment;
 import com.example.cafeorderapps.Fragment.DrinkFragment;
@@ -27,9 +33,11 @@ public class HomeActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView recyclerView1;
     HomeAdapter homeAdapter;
+    RecyclerView.LayoutManager mLayoutManager;
     CategoriAdapter categoriAdapter;
     ArrayList<HomeModel> homeModels;
     ArrayList<CategoriModel> categoriModels;
+    ArrayList<HomeModel> searchModels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +46,16 @@ public class HomeActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        recyclerView = (RecyclerView) findViewById(R.id.list);
+        recyclerView.setHasFixedSize(true);
+
+        mLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(mLayoutManager);
+
+        homeAdapter = new HomeAdapter(homeModels) {
+        };
+        recyclerView.setAdapter(homeAdapter);
 
         BottomNavigationView navigationView = findViewById(R.id.navigationView);
 
@@ -97,5 +115,57 @@ public class HomeActivity extends AppCompatActivity {
                     return true;
                 }
             };
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.search, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+        @Override
+        public boolean onQueryTextChange(String nextText) {
+            //Data akan berubah saat user menginputkan text/kata kunci pada SearchView
+            nextText = nextText.toLowerCase();
+            ArrayList<HomeModel> dataFilter = new ArrayList<>();
+            for(HomeModel data : searchModels){
+                String nama = data.getNama().toLowerCase();
+                if(nama.contains(nextText)){
+                    dataFilter.add(data);
+                }
+            }
+            DataFilterAdapter.setFilter(dataFilter);
+            return true;
+        }
+        });
+        return true;
     }
 
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+}
