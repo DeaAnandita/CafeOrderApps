@@ -9,8 +9,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardku"
-            android:layout_width="190dp"
-            android:layout_height="250dp"
+            android:layout_width="match_parent"
+            android:layout_height="270dp"
             app:cardCornerRadius="6dp"
             app:cardElevation="3dp"
             app:cardUseCompatPadding="true">
@@ -21,11 +21,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:layout_width="match_parent"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_height="wrap_content" />
+
                 <ImageView
+                    android:id="@+id/image"
                     android:layout_width="match_parent"
                     android:layout_height="151dp"
                     android:gravity="center"
-                    android:src="@mipmap/cafe_bg" />
+                    android:src="@mipmap/icon" />
 
                 <TextView
                     android:id="@+id/txtemail"

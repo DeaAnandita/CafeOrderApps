@@ -1,22 +1,26 @@
-package com.example.cafeorderapps;
+package com.example.cafeorderapps.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cafeorderapps.Model.DetailModel;
+import com.example.cafeorderapps.R;
+
 import java.util.ArrayList;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder>{
+public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.HomeViewHolder>{
 
-    private ArrayList<HomeModel> dataList;
+    private ArrayList<DetailModel> dataList;
     View viewku;
 
-    public HomeAdapter(ArrayList<HomeModel> dataList) {
+    public DetailAdapter(ArrayList<DetailModel> dataList) {
         this.dataList = dataList;
     }
 
@@ -24,14 +28,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     @Override
     public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        viewku = layoutInflater.inflate(R.layout.list_item, parent, false);
+        viewku = layoutInflater.inflate(R.layout.listitem_detail, parent, false);
         return new HomeViewHolder(viewku);
     }
 
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
-        holder.txtnama.setText(dataList.get(position).getNama());
-        holder.txtEmail.setText(dataList.get(position).getEmail());
+        holder.txtnama.setText(dataList.get(position).getNamaD());
+        holder.txtEmail.setText(dataList.get(position).getHargaD());
     }
 
     @Override
@@ -41,13 +45,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     class HomeViewHolder extends RecyclerView.ViewHolder{
         private TextView txtEmail, txtnama;
+        private ImageView img;
         CardView cardku;
 
         HomeViewHolder(View itemView) {
             super(itemView);
-            cardku = itemView.findViewById(R.id.cardku);
-            txtEmail = itemView.findViewById(R.id.txtemail);
-            txtnama = itemView.findViewById(R.id.txtnama);
+            cardku = itemView.findViewById(R.id.cardku_D);
+            txtEmail = itemView.findViewById(R.id.txtnamaD);
+            txtnama = itemView.findViewById(R.id.txthargaD);
+            img = itemView.findViewById(R.id.imgD);
 
         }
     }

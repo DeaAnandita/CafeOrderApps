@@ -1,4 +1,4 @@
-package com.example.cafeorderapps;
+package com.example.cafeorderapps.Model;
 
 public class HomeModel {
 
@@ -8,6 +8,7 @@ public class HomeModel {
         this.id = id;
         this.email = email;
         this.nama = nama;
+
     }
 
     public String getId() {

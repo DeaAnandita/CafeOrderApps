@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cafeorderapps">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,6 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".SearchBar">
+
+        </activity>
+        <activity android:name=".DetailActivity" />
         <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,7 +20,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".MainActivity"/>
+=======
+        <activity android:name=".LoginActivity" >
+
+        </activity>
+>>>>>>> ef6e46f60a60ae95805fc692510c8a296e134e3c
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
