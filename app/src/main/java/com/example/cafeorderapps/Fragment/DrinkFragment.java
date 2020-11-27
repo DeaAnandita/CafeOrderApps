@@ -60,36 +60,51 @@ public class DrinkFragment extends Fragment {
         recyclerView2 = view.findViewById(R.id.list);
 
         categoriModels = new ArrayList<>();
-        categoriModels.add(new CategoriModel("1", "Mochaccino"));
-        categoriModels.add(new CategoriModel("2", "Susu"));
-        categoriModels.add(new CategoriModel("3", "Espresso"));
-        categoriModels.add(new CategoriModel("4", "Macchiato"));
-        categoriModels.add(new CategoriModel("5", "Choco"));
-        categoriModels.add(new CategoriModel("6", "Americano"));
-        categoriModels.add(new CategoriModel("7", "Mochaccino"));
-        categoriModels.add(new CategoriModel("8", "Susu"));
-        categoriModels.add(new CategoriModel("9", "Espresso"));
-        categoriModels.add(new CategoriModel("10", "Macchiato"));
-        categoriModels.add(new CategoriModel("11", "Choco"));
-        categoriModels.add(new CategoriModel("12", "Americano"));
+        categoriModels.add(new CategoriModel("1", "Mochaccino",false));
+        categoriModels.add(new CategoriModel("2", "Susu",false));
+        categoriModels.add(new CategoriModel("3", "Espresso",false));
+        categoriModels.add(new CategoriModel("4", "Macchiato",false));
+        categoriModels.add(new CategoriModel("5", "Choco",false));
+        categoriModels.add(new CategoriModel("6", "Americano",false));
+        categoriModels.add(new CategoriModel("7", "Mochaccino",false));
+        categoriModels.add(new CategoriModel("8", "Susu",false));
+        categoriModels.add(new CategoriModel("9", "Espresso",false));
+        categoriModels.add(new CategoriModel("10", "Macchiato",false));
+        categoriModels.add(new CategoriModel("11", "Choco",false));
+
+        categoriModels.add(new CategoriModel("1", "Mochaccino", false));
+        categoriModels.add(new CategoriModel("2", "Susu", false));
+        categoriModels.add(new CategoriModel("3", "Espresso", false));
+        categoriModels.add(new CategoriModel("4", "Macchiato", false));
+        categoriModels.add(new CategoriModel("5", "Choco", false));
+        categoriModels.add(new CategoriModel("6", "Americano", false));
+
         categoriAdapter = new CategoriAdapter(categoriModels);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView1.setLayoutManager(layoutManager);
         recyclerView1.setAdapter(categoriAdapter);
 
         homeModels = new ArrayList<>();
-        homeModels.add(new HomeModel("1", "Mochaccino", "15.000,-"));
-        homeModels.add(new HomeModel("2", "Susu Caramel", "15.000,-"));
-        homeModels.add(new HomeModel("3", "Espresso", "15.000,-"));
-        homeModels.add(new HomeModel("4", "Macchiato", "15.000,-"));
-        homeModels.add(new HomeModel("5", "Choco Latte", "15.000,-"));
-        homeModels.add(new HomeModel("6", "Americano", "15.000,-"));
-        homeModels.add(new HomeModel("7", "Mochaccino", "15.000,-"));
-        homeModels.add(new HomeModel("8", "Susu Caramel", "15.000,-"));
-        homeModels.add(new HomeModel("9", "Espresso", "15.000,-"));
-        homeModels.add(new HomeModel("10", "Macchiato", "15.000,-"));
-        homeModels.add(new HomeModel("11", "Choco Latte", "15.000,-"));
-        homeModels.add(new HomeModel("12", "Americano", "15.000,-"));
+        homeModels.add(new HomeModel("1", "Mochaccino", "15.000,-", false));
+        homeModels.add(new HomeModel("2", "Susu Caramel", "15.000,-", false));
+        homeModels.add(new HomeModel("3", "Espresso", "15.000,-", false));
+        homeModels.add(new HomeModel("4", "Macchiato", "15.000,-",false));
+        homeModels.add(new HomeModel("5", "Choco Latte", "15.000,-",false));
+        homeModels.add(new HomeModel("6", "Americano", "15.000,-",false));
+        homeModels.add(new HomeModel("7", "Mochaccino", "15.000,-",false));
+        homeModels.add(new HomeModel("8", "Susu Caramel", "15.000,-",false));
+        homeModels.add(new HomeModel("9", "Espresso", "15.000,-",false));
+        homeModels.add(new HomeModel("10", "Macchiato", "15.000,-",false));
+        homeModels.add(new HomeModel("11", "Choco Latte", "15.000,-",false));
+        homeModels.add(new HomeModel("12", "Americano", "15.000,-",false));
+
+        homeModels.add(new HomeModel("1", "Mochaccino", "15.000,-", false));
+        homeModels.add(new HomeModel("2", "Susu Caramel", "15.000,-", false));
+        homeModels.add(new HomeModel("3", "Espresso", "15.000,-", false));
+        homeModels.add(new HomeModel("4", "Macchiato", "15.000,-", false));
+        homeModels.add(new HomeModel("5", "Choco Latte", "15.000,-", false));
+        homeModels.add(new HomeModel("6", "Americano", "15.000,-", false));
+
 
         homeAdapter = new HomeAdapter(getContext(), homeModels);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);

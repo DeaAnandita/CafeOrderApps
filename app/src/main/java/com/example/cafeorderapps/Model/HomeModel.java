@@ -3,12 +3,13 @@ package com.example.cafeorderapps.Model;
 public class HomeModel {
 
     String id, email, nama;
+    boolean doubleClick;
 
-    public HomeModel(String id, String email, String nama) {
+    public HomeModel(String id, String email, String nama, boolean doubleClick) {
         this.id = id;
         this.email = email;
         this.nama = nama;
-
+        this.doubleClick = doubleClick;
     }
 
     public String getId() {
@@ -33,5 +34,13 @@ public class HomeModel {
 
     public void setNama(String nama) {
         this.nama = nama;
+    }
+
+    public boolean isDoubleClick() {
+        return doubleClick;
+    }
+
+    public void setDoubleClick(boolean doubleClick) {
+        this.doubleClick = doubleClick;
     }
 }

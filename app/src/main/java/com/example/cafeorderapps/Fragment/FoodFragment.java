@@ -61,36 +61,31 @@ public class FoodFragment extends Fragment {
         recyclerView2 = view.findViewById(R.id.list);
 
         categoriModels = new ArrayList<>();
-        categoriModels.add(new CategoriModel("1", "Chicken"));
-        categoriModels.add(new CategoriModel("2", "Noodle"));
-        categoriModels.add(new CategoriModel("3", "Soup"));
-        categoriModels.add(new CategoriModel("4", "Cake"));
-        categoriModels.add(new CategoriModel("5", "Cookie"));
-        categoriModels.add(new CategoriModel("6", "Salad"));
-        categoriModels.add(new CategoriModel("7", "Chicken"));
-        categoriModels.add(new CategoriModel("8", "Noodle"));
-        categoriModels.add(new CategoriModel("9", "Soup"));
-        categoriModels.add(new CategoriModel("10", "Cake"));
-        categoriModels.add(new CategoriModel("11", "Cookie"));
-        categoriModels.add(new CategoriModel("12", "Salad"));
+        categoriModels.add(new CategoriModel("1", "Chicken", false));
+        categoriModels.add(new CategoriModel("2", "Noodle", false));
+        categoriModels.add(new CategoriModel("3", "Soup", false));
+        categoriModels.add(new CategoriModel("4", "Cake", false));
+        categoriModels.add(new CategoriModel("5", "Cookie", false));
+        categoriModels.add(new CategoriModel("6", "Salad", false));
+        categoriModels.add(new CategoriModel("7", "Chicken", false));
+        categoriModels.add(new CategoriModel("8", "Noodle", false));
+        categoriModels.add(new CategoriModel("9", "Soup", false));
+        categoriModels.add(new CategoriModel("10", "Cake", false));
+        categoriModels.add(new CategoriModel("11", "Cookie", false));
+        categoriModels.add(new CategoriModel("12", "Salad", false));
+
         categoriAdapter = new CategoriAdapter(categoriModels);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView1.setLayoutManager(layoutManager);
         recyclerView1.setAdapter(categoriAdapter);
 
         homeModels = new ArrayList<>();
-        homeModels.add(new HomeModel("1", "Chicken Strips", "16.000,-"));
-        homeModels.add(new HomeModel("2", "Spaghetti Supreme", "30.000,-"));
-        homeModels.add(new HomeModel("3", "Cream Soup", "25.000,-"));
-        homeModels.add(new HomeModel("4", "Pudding", "30.000,-"));
-        homeModels.add(new HomeModel("5", "Cookie Crumb", "23.000,-"));
-        homeModels.add(new HomeModel("6", "Salad Deluxe", "32.000,-"));
-        homeModels.add(new HomeModel("7", "Chicken Strips", "16.000,-"));
-        homeModels.add(new HomeModel("8", "Spaghetti Supreme", "30.000,-"));
-        homeModels.add(new HomeModel("9", "Cream Soup", "25.000,-"));
-        homeModels.add(new HomeModel("10", "Pudding", "30.000,-"));
-        homeModels.add(new HomeModel("11", "Cookie Crumb", "23.000,-"));
-        homeModels.add(new HomeModel("12", "Salad Deluxe", "32.000,-"));
+        homeModels.add(new HomeModel("1", "Chicken Strips", "16.000,-", false));
+        homeModels.add(new HomeModel("2", "Spaghetti Supreme", "30.000,-", false));
+        homeModels.add(new HomeModel("3", "Cream Soup", "25.000,-", false));
+        homeModels.add(new HomeModel("4", "Pudding", "30.000,-", false));
+        homeModels.add(new HomeModel("5", "Cookie Crumb", "23.000,-", false));
+        homeModels.add(new HomeModel("6", "Salad Deluxe", "32.000,-", false));
 
         homeAdapter = new HomeAdapter(getContext(), homeModels);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);

@@ -21,10 +21,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:layout_width="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:visibility="invisible"
+                    android:id="@+id/ivCheck"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    app:srcCompat="@drawable/ic_check"
+                    android:layout_marginStart="10dp" />
 
                 <ImageView
                     android:id="@+id/image"

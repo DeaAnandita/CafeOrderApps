@@ -1,11 +1,16 @@
 package com.example.cafeorderapps;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -58,24 +63,24 @@ public class HomeActivity extends AppCompatActivity {
         navigationView.setOnNavigationItemSelectedListener(selectedListener);
 
         categoriModels = new ArrayList<>();
-        categoriModels.add(new CategoriModel("1", "Mochaccino"));
-        categoriModels.add(new CategoriModel("2", "Susu"));
-        categoriModels.add(new CategoriModel("3", "Espresso"));
-        categoriModels.add(new CategoriModel("4", "Macchiato"));
-        categoriModels.add(new CategoriModel("5", "Choco"));
-        categoriModels.add(new CategoriModel("6", "Americano"));
+        categoriModels.add(new CategoriModel("1", "Mochaccino", false));
+        categoriModels.add(new CategoriModel("2", "Susu", false));
+        categoriModels.add(new CategoriModel("3", "Espresso", false));
+        categoriModels.add(new CategoriModel("4", "Macchiato", false));
+        categoriModels.add(new CategoriModel("5", "Choco", false));
+        categoriModels.add(new CategoriModel("6", "Americano", false));
         categoriAdapter = new CategoriAdapter(categoriModels);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView1.setLayoutManager(layoutManager);
         recyclerView1.setAdapter(categoriAdapter);
 
         homeModels = new ArrayList<>();
-        homeModels.add(new HomeModel("1", "Mochaccino", "15.000,-"));
-        homeModels.add(new HomeModel("2", "Susu Caramel", "15.000,-"));
-        homeModels.add(new HomeModel("3", "Espresso", "15.000,-"));
-        homeModels.add(new HomeModel("4", "Macchiato", "15.000,-"));
-        homeModels.add(new HomeModel("5", "Choco Latte", "15.000,-"));
-        homeModels.add(new HomeModel("6", "Americano", "15.000,-"));
+        homeModels.add(new HomeModel("1", "Mochaccino", "15.000,-", false));
+        homeModels.add(new HomeModel("2", "Susu Caramel", "15.000,-", false));
+        homeModels.add(new HomeModel("3", "Espresso", "15.000,-", false));
+        homeModels.add(new HomeModel("4", "Macchiato", "15.000,-", false));
+        homeModels.add(new HomeModel("5", "Choco Latte", "15.000,-", false));
+        homeModels.add(new HomeModel("6", "Americano", "15.000,-", false));
 
         homeAdapter = new HomeAdapter(this, homeModels);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
@@ -109,34 +114,5 @@ public class HomeActivity extends AppCompatActivity {
                     return true;
                 }
             };
+    }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.search, menu);
-//        MenuItem searchItem = menu.findItem(R.id.search);
-//        SearchView searchView = (SearchView) searchItem.getActionView();
-//        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String nextText) {
-//                try {
-//                    recyclerView.setAdapter(homeAdapter);
-//                    homeAdapter.getFilter().filter(nextText);
-//                    for (HomeModel model : homeModels) {
-//                        Log.d("", ""+model.getEmail());
-//                    }
-//                } catch (Exception e) {
-//                    Log.d("error", "" + e.toString());
-//                }
-//                return false;
-//            }
-//        });
-//        return true;
-
-}

@@ -41,12 +41,15 @@ public class CartFragment extends Fragment {
         recyclerView.setNestedScrollingEnabled(false);
 
         DetailModels = new ArrayList<>();
-        DetailModels.add(new DetailModel("1", "Susu Caramel", "15.000,-"));
-        DetailModels.add(new DetailModel("2", "Susu Caramel", "15.000,-"));
-        DetailModels.add(new DetailModel("3", "Susu Caramel", "15.000,-"));
-        DetailModels.add(new DetailModel("4", "Susu Caramel", "15.000,-"));
-        DetailModels.add(new DetailModel("5", "Susu Caramel", "15.000,-"));
-//        DetailModels.add(new DetailModel("2", "Susu Caramel", "15.000,-"));
+        DetailModels.add(new DetailModel("1", "Susu Caramel", "15.000,-", "2", false));
+        DetailModels.add(new DetailModel("2", "Susu Caramel", "15.000,-","2", false));
+        DetailModels.add(new DetailModel("3", "Susu Caramel", "15.000,-","2", false));
+        DetailModels.add(new DetailModel("4", "Susu Caramel", "15.000,-","2", false));
+        DetailModels.add(new DetailModel("5", "Susu Caramel", "15.000,-","2", false));
+
+        DetailModels.add(new DetailModel("1", "Susu Caramel", "15.000,-", "2", true));
+        DetailModels.add(new DetailModel("2", "Susu Caramel", "15.000,-", "2", false));
+
 
         detailAdapter = new DetailAdapter(DetailModels);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
