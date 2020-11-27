@@ -68,24 +68,24 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView.setAdapter(homeAdapter);
 
         categoriModels = new ArrayList<>();
-        categoriModels.add(new CategoriModel("1", "Mochaccino"));
-        categoriModels.add(new CategoriModel("2", "Susu"));
-        categoriModels.add(new CategoriModel("3", "Espresso"));
-        categoriModels.add(new CategoriModel("4", "Macchiato"));
-        categoriModels.add(new CategoriModel("5", "Choco"));
-        categoriModels.add(new CategoriModel("6", "Americano"));
+        categoriModels.add(new CategoriModel("1", "Mochaccino", false));
+        categoriModels.add(new CategoriModel("2", "Susu", false));
+        categoriModels.add(new CategoriModel("3", "Espresso", false));
+        categoriModels.add(new CategoriModel("4", "Macchiato", false));
+        categoriModels.add(new CategoriModel("5", "Choco", false));
+        categoriModels.add(new CategoriModel("6", "Americano", false));
         categoriAdapter = new CategoriAdapter(categoriModels);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView1.setLayoutManager(layoutManager);
         recyclerView1.setAdapter(categoriAdapter);
 
         homeModels = new ArrayList<>();
-        homeModels.add(new HomeModel("1", "Mochaccino", "15.000,-"));
-        homeModels.add(new HomeModel("2", "Susu Caramel", "15.000,-"));
-        homeModels.add(new HomeModel("3", "Espresso", "15.000,-"));
-        homeModels.add(new HomeModel("4", "Macchiato", "15.000,-"));
-        homeModels.add(new HomeModel("5", "Choco Latte", "15.000,-"));
-        homeModels.add(new HomeModel("6", "Americano", "15.000,-"));
+        homeModels.add(new HomeModel("1", "Mochaccino", "15.000,-", false));
+        homeModels.add(new HomeModel("2", "Susu Caramel", "15.000,-", false));
+        homeModels.add(new HomeModel("3", "Espresso", "15.000,-", false));
+        homeModels.add(new HomeModel("4", "Macchiato", "15.000,-", false));
+        homeModels.add(new HomeModel("5", "Choco Latte", "15.000,-", false));
+        homeModels.add(new HomeModel("6", "Americano", "15.000,-", false));
 
         homeAdapter = new HomeAdapter(homeModels);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);

@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -34,8 +35,14 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.HomeViewHo
 
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
-        holder.txtnama.setText(dataList.get(position).getNamaD());
-        holder.txtEmail.setText(dataList.get(position).getHargaD());
+        holder.doubleclick = dataList.get(position).isDoubleclick();
+        if (holder.doubleclick) {
+            holder.cardku.setVisibility(View.VISIBLE);
+            holder.txtnama.setText(dataList.get(position).getNamaD());
+            holder.txtEmail.setText(dataList.get(position).getHargaD());
+        }else {
+            holder.cardku.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -47,6 +54,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.HomeViewHo
         private TextView txtEmail, txtnama;
         private ImageView img;
         CardView cardku;
+        boolean doubleclick;
 
         HomeViewHolder(View itemView) {
             super(itemView);
