@@ -1,8 +1,11 @@
 package com.example.cafeorderapps.Adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,16 +17,20 @@ import com.example.cafeorderapps.Model.HomeModel;
 import com.example.cafeorderapps.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder>{
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> implements Filterable {
 
-    private ArrayList<HomeModel> dataList;
+    private List<HomeModel> dataList;
+    private List<HomeModel> dataListFull;
+    Context mContext;
     View viewku;
 
-    public HomeAdapter(ArrayList<HomeModel> dataList) {
+    public HomeAdapter(Context mContext, List<HomeModel> dataList) {
+        this.mContext = mContext;
         this.dataList = dataList;
+        dataListFull = new ArrayList<>(dataList);
     }
-
 
     @NonNull
     @Override
@@ -59,5 +66,39 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
         }
     }
+
+    @Override
+    public Filter getFilter() {
+        return dataListFilter;
+    }
+
+    private Filter dataListFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<HomeModel> filteredList = new ArrayList<>();
+            if (charSequence == null || charSequence.length() == 0) {
+                filteredList.addAll(dataListFull);
+            } else {
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+                for (HomeModel item : dataListFull) {
+                    if (item.getEmail().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            dataList.clear();
+            dataList.addAll((List) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
+
 
 }

@@ -3,6 +3,8 @@ package com.example.cafeorderapps.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,14 +15,17 @@ import com.example.cafeorderapps.Model.HomeModel;
 import com.example.cafeorderapps.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class DataFilterAdapter extends RecyclerView.Adapter<DataFilterAdapter.ViewHolder>{
+public class DataFilterAdapter extends RecyclerView.Adapter<DataFilterAdapter.ViewHolder> implements Filterable {
 
     private static ArrayList<HomeModel> arrayList1;
-    private ArrayList<HomeModel> arrayList;
+    private ArrayList<HomeModel> dataList;
+    private ArrayList<HomeModel> dataListFull;
 
     DataFilterAdapter(ArrayList<HomeModel> arrayList){
-        this.arrayList = arrayList;
+        this.dataList = arrayList;
+        dataListFull = new ArrayList<>(arrayList);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -46,18 +51,46 @@ public class DataFilterAdapter extends RecyclerView.Adapter<DataFilterAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.Nama.setText(arrayList.get(position).getNama());
-        holder.Harga.setText(arrayList.get(position).getEmail());
+        holder.Nama.setText(dataList.get(position).getNama());
+        holder.Harga.setText(dataList.get(position).getEmail());
     }
 
     @Override
     public int getItemCount() {
-        return arrayList.size();
+        return dataList.size();
     }
 
-    public static void setFilter(ArrayList<HomeModel> filterList){
-        arrayList1 = new ArrayList<>();
-        arrayList1.addAll(filterList);
-//        notifyDataSetChanged();
+    @Override
+    public Filter getFilter() {
+        return dataListFilter;
     }
+
+    private Filter dataListFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<HomeModel> filteredList = new ArrayList<>();
+            if (charSequence == null || charSequence.length() == 0) {
+                filteredList.addAll(dataListFull);
+            } else {
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+                for (HomeModel item : dataListFull) {
+                    if (item.getNama().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            dataList.clear();
+            dataList.addAll((List) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
+
 }

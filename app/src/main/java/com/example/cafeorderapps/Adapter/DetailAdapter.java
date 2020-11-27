@@ -35,7 +35,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.HomeViewHo
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
         holder.txtnama.setText(dataList.get(position).getNamaD());
-        holder.txtEmail.setText(dataList.get(position).getHargaD());
+        holder.txtHarga.setText(dataList.get(position).getHargaD());
     }
 
     @Override
@@ -44,15 +44,15 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.HomeViewHo
     }
 
     class HomeViewHolder extends RecyclerView.ViewHolder{
-        private TextView txtEmail, txtnama;
+        private TextView txtHarga, txtnama;
         private ImageView img;
         CardView cardku;
 
         HomeViewHolder(View itemView) {
             super(itemView);
             cardku = itemView.findViewById(R.id.cardku_D);
-            txtEmail = itemView.findViewById(R.id.txtnamaD);
-            txtnama = itemView.findViewById(R.id.txthargaD);
+            txtnama = itemView.findViewById(R.id.txtnamaD);
+            txtHarga = itemView.findViewById(R.id.txthargaD);
             img = itemView.findViewById(R.id.imgD);
 
         }

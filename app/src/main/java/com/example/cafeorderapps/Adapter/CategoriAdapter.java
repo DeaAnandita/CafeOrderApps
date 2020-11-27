@@ -12,14 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cafeorderapps.Model.CategoriModel;
 import com.example.cafeorderapps.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class CategoriAdapter extends RecyclerView.Adapter<CategoriAdapter.HomeViewHolder>{
 
-    private ArrayList<CategoriModel> dataList;
+    private List<CategoriModel> dataList;
     View viewku;
 
-    public CategoriAdapter(ArrayList<CategoriModel> dataList) {
+    public CategoriAdapter(List<CategoriModel> dataList) {
         this.dataList = dataList;
     }
 
