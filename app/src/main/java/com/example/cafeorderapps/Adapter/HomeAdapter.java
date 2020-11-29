@@ -1,5 +1,11 @@
 package com.example.cafeorderapps.Adapter;
 
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,19 +32,21 @@ import com.example.cafeorderapps.R;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import static android.content.ContentValues.TAG;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder>{
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> implements Filterable {
 
-    private ArrayList<HomeModel> dataList;
     private List<DetailModel> modelList = new ArrayList<>();
+    private List<HomeModel> dataList;
+    private List<HomeModel> dataListFull;
+    Context mContext;
     View viewku;
 
-    public HomeAdapter(ArrayList<HomeModel> dataList) {
+    public HomeAdapter(Context mContext, List<HomeModel> dataList) {
+        this.mContext = mContext;
         this.dataList = dataList;
+        dataListFull = new ArrayList<>(dataList);
     }
-
 
     @NonNull
     @Override
@@ -63,7 +71,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                     d.setTitle("NumberPicker");
                     d.setContentView(R.layout.number_picker);
                     final NumberPicker np = d.findViewById(R.id.numberPicker1);
-                    np.setMaxValue(100);
+                    np.setMaxValue(50);
                     np.setMinValue(0);
                     np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                         @Override
@@ -126,5 +134,39 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             ivCheck = itemView.findViewById(R.id.ivCheck);
         }
     }
+
+    @Override
+    public Filter getFilter() {
+        return dataListFilter;
+    }
+
+    private Filter dataListFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<HomeModel> filteredList = new ArrayList<>();
+            if (charSequence == null || charSequence.length() == 0) {
+                filteredList.addAll(dataListFull);
+            } else {
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+                for (HomeModel item : dataListFull) {
+                    if (item.getEmail().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            dataList.clear();
+            dataList.addAll((List) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
+
 
 }

@@ -1,11 +1,12 @@
 package com.example.cafeorderapps;
 
-import android.annotation.SuppressLint;
-import android.app.SearchManager;
-import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cafeorderapps.Adapter.CategoriAdapter;
-import com.example.cafeorderapps.Adapter.DataFilterAdapter;
 import com.example.cafeorderapps.Adapter.HomeAdapter;
 import com.example.cafeorderapps.Fragment.CartFragment;
 import com.example.cafeorderapps.Fragment.DrinkFragment;
@@ -27,45 +27,40 @@ import com.example.cafeorderapps.Model.HomeModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
+    public RecyclerView recyclerView;
     RecyclerView recyclerView1;
-    HomeAdapter homeAdapter;
+    public HomeAdapter homeAdapter;
     RecyclerView.LayoutManager mLayoutManager;
     CategoriAdapter categoriAdapter;
-    ArrayList<HomeModel> homeModels;
-    ArrayList<CategoriModel> categoriModels;
-    ArrayList<HomeModel> searchModels;
+    public List<HomeModel> homeModels;
+    List<CategoriModel> categoriModels;
+    List<HomeModel> searchModels;
+
+    ArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        searchModels = new ArrayList<>();
+        getData();
+        adapter = new ArrayAdapter<HomeAdapter>(this, R.layout.support_simple_spinner_dropdown_item);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        recyclerView = (RecyclerView) findViewById(R.id.list);
-        recyclerView.setHasFixedSize(true);
-
-        mLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(mLayoutManager);
-
-        homeAdapter = new HomeAdapter(homeModels) {
-        };
-        recyclerView.setAdapter(homeAdapter);
-
         BottomNavigationView navigationView = findViewById(R.id.navigationView);
-
         recyclerView = findViewById(R.id.list);
         recyclerView1 = findViewById(R.id.rvkategori);
-        navigationView.setOnNavigationItemSelectedListener(selectedListener);
 
-        homeModels = new ArrayList<>();
-        homeAdapter = new HomeAdapter(homeModels);
-        recyclerView.setAdapter(homeAdapter);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DrinkFragment()).commit();
+
+        setSupportActionBar(toolbar);
+
+        navigationView.setOnNavigationItemSelectedListener(selectedListener);
 
         categoriModels = new ArrayList<>();
         categoriModels.add(new CategoriModel("1", "Mochaccino", false));
@@ -87,10 +82,14 @@ public class HomeActivity extends AppCompatActivity {
         homeModels.add(new HomeModel("5", "Choco Latte", "15.000,-", false));
         homeModels.add(new HomeModel("6", "Americano", "15.000,-", false));
 
-        homeAdapter = new HomeAdapter(homeModels);
+        homeAdapter = new HomeAdapter(this, homeModels);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(homeAdapter);
+    }
+
+    private void getData() {
+        searchModels = new ArrayList<>();
     }
 
     BottomNavigationView.OnNavigationItemSelectedListener selectedListener =
@@ -115,57 +114,5 @@ public class HomeActivity extends AppCompatActivity {
                     return true;
                 }
             };
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.search, menu);
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String nextText) {
-                //Data akan berubah saat user menginputkan text/kata kunci pada SearchView
-                nextText = nextText.toLowerCase();
-                ArrayList<HomeModel> dataFilter = new ArrayList<>();
-                for(HomeModel data : searchModels){
-                    String nama = data.getNama().toLowerCase();
-                    if(nama.contains(nextText)){
-                        dataFilter.add(data);
-                    }
-                }
-                DataFilterAdapter.setFilter(dataFilter);
-                return true;
-            }
-        });
-        return true;
     }
 
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-
-}

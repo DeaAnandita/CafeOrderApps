@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,7 +23,8 @@ public class CartFragment extends Fragment {
     RecyclerView recyclerView;
     DetailAdapter detailAdapter;
     ArrayList<DetailModel> DetailModels;
-    Toolbar toolbar;
+
+    //Toolbar toolbar;
 
     @Nullable
     @Override
@@ -39,15 +39,18 @@ public class CartFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.rvDetail);
 
+        recyclerView.setNestedScrollingEnabled(false);
+
         DetailModels = new ArrayList<>();
         DetailModels = (ArrayList<DetailModel>) PrefConfig.readListFromPref(getActivity());
 
         if (DetailModels == null)
             DetailModels = new ArrayList<>();
 
+
         detailAdapter = new DetailAdapter(DetailModels);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(layoutManager);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(detailAdapter);
 
         return view;
