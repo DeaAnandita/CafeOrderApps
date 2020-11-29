@@ -20,15 +20,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cafeorderapps.Model.DetailModel;
 import com.example.cafeorderapps.Model.HomeModel;
+import com.example.cafeorderapps.PrefConfig;
 import com.example.cafeorderapps.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder>{
 
     private ArrayList<HomeModel> dataList;
+    private List<DetailModel> modelList = new ArrayList<>();
     View viewku;
 
     public HomeAdapter(ArrayList<HomeModel> dataList) {
@@ -71,6 +75,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                                 @Override
                                 public void onClick(View v) {
                                     Toast.makeText(holder.itemView.getContext(), Integer.toString(i2), Toast.LENGTH_SHORT).show();
+                                    DetailModel taskModel = new DetailModel("a", dataList.get(position).getNama(), dataList.get(position).getEmail(), Integer.toString(i2));
+                                    modelList.add(taskModel);
+                                    PrefConfig.writeListInPref(holder.itemView.getContext(), modelList);
+                                    Collections.reverse(modelList);
                                     d.dismiss();
                                 }
                             });

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cafeorderapps.Adapter.DetailAdapter;
 import com.example.cafeorderapps.Model.DetailModel;
+import com.example.cafeorderapps.PrefConfig;
 import com.example.cafeorderapps.R;
 
 import java.util.ArrayList;
@@ -39,8 +40,10 @@ public class CartFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rvDetail);
 
         DetailModels = new ArrayList<>();
-        DetailModels.add(new DetailModel("1", "Susu Caramel", "15.000,-", "2", true));
-        DetailModels.add(new DetailModel("2", "Susu Caramel", "15.000,-", "2", false));
+        DetailModels = (ArrayList<DetailModel>) PrefConfig.readListFromPref(getActivity());
+
+        if (DetailModels == null)
+            DetailModels = new ArrayList<>();
 
         detailAdapter = new DetailAdapter(DetailModels);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
