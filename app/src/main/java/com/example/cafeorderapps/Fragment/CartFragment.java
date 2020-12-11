@@ -1,9 +1,11 @@
 package com.example.cafeorderapps.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,17 +14,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cafeorderapps.Adapter.DetailAdapter;
-import com.example.cafeorderapps.Model.DetailModel;
-import com.example.cafeorderapps.PrefConfig;
+import com.example.cafeorderapps.Adapter.FoodAdapter;
+import com.example.cafeorderapps.Model.HomeModel;
 import com.example.cafeorderapps.R;
 
 import java.util.ArrayList;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
+
 public class CartFragment extends Fragment {
 
+    private Realm realm;
+    private ArrayList mProdukList;
     RecyclerView recyclerView;
     DetailAdapter detailAdapter;
-    ArrayList<DetailModel> DetailModels;
+    Button btnPesan;
 
     //Toolbar toolbar;
 
@@ -38,18 +46,22 @@ public class CartFragment extends Fragment {
 //        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView = view.findViewById(R.id.rvDetail);
+        btnPesan = view.findViewById(R.id.btnPesan);
 
         recyclerView.setNestedScrollingEnabled(false);
 
-        DetailModels = new ArrayList<>();
-        DetailModels = (ArrayList<DetailModel>) PrefConfig.readListFromPref(getActivity());
+        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
+        realm = Realm.getInstance(configuration);
 
-        if (DetailModels == null)
-            DetailModels = new ArrayList<>();
+        if (mProdukList == null)
+            mProdukList = new ArrayList<>();
 
+        RealmResults<HomeModel> homeModels = realm.where(HomeModel.class).findAll();
+        mProdukList.addAll(homeModels);
 
-        detailAdapter = new DetailAdapter(DetailModels);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        Log.d("TAG", "onCreateView: " + homeModels.toString());
+
+        detailAdapter = new DetailAdapter(getContext(), mProdukList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(detailAdapter);
 

@@ -1,16 +1,11 @@
 package com.example.cafeorderapps.Model;
 
-public class HomeModel {
+import io.realm.RealmObject;
 
-    String id, email, nama;
+public class HomeModel extends RealmObject {
+
+    String id, kodeMakanan, namaMakanan, jenisMakanan, hargaMakanan, avatar, jumlah;
     boolean doubleClick;
-
-    public HomeModel(String id, String email, String nama, boolean doubleClick) {
-        this.id = id;
-        this.email = email;
-        this.nama = nama;
-        this.doubleClick = doubleClick;
-    }
 
     public String getId() {
         return id;
@@ -20,20 +15,52 @@ public class HomeModel {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getKodeMakanan() {
+        return kodeMakanan;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setKodeMakanan(String kodeMakanan) {
+        this.kodeMakanan = kodeMakanan;
     }
 
-    public String getNama() {
-        return nama;
+    public String getNamaMakanan() {
+        return namaMakanan;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
+    public void setNamaMakanan(String namaMakanan) {
+        this.namaMakanan = namaMakanan;
+    }
+
+    public String getJenisMakanan() {
+        return jenisMakanan;
+    }
+
+    public void setJenisMakanan(String jenisMakanan) {
+        this.jenisMakanan = jenisMakanan;
+    }
+
+    public String getHargaMakanan() {
+        return hargaMakanan;
+    }
+
+    public void setHargaMakanan(String hargaMakanan) {
+        this.hargaMakanan = hargaMakanan;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getJumlah() {
+        return jumlah;
+    }
+
+    public void setJumlah(String jumlah) {
+        this.jumlah = jumlah;
     }
 
     public boolean isDoubleClick() {

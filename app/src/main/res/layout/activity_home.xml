@@ -11,9 +11,7 @@
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        tools:ignore="Suspicious0dp">
+        android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -28,65 +26,6 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <ScrollView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/rootView"
-            android:fillViewport="true"
-            android:layout_below="@+id/etSearch"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/bg"
-                    android:layout_width="match_parent"
-                    android:layout_height="246dp"
-                    android:background="@mipmap/home_bg"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tvkategori"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Kategori :"
-                    android:textSize="17dp"
-                    android:textStyle="bold"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_below="@+id/bg"
-                    android:textColor="@color/white"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvkategori"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    android:visibility="visible"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvkategori"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/listitem_categori" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/list"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/rvkategori"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="10dp"
-                    android:paddingBottom="60dp"
-                    android:scrollbars="vertical"
-                    tools:listitem="@layout/list_item">
-
-                </androidx.recyclerview.widget.RecyclerView>
-            </RelativeLayout>
-        </ScrollView>
-
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -96,8 +35,8 @@
         android:layout_alignParentBottom="true"
         android:background="?android:attr/windowBackground"
         app:itemBackground="@color/colorPrimary"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
         app:menu="@menu/navigation" />
 
 </RelativeLayout>
