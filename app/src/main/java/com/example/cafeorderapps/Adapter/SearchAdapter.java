@@ -2,10 +2,10 @@ package com.example.cafeorderapps.Adapter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
@@ -27,38 +27,34 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
-public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchViewHolder>{
 
     RealmHelper realmHelper;
     Realm realm;
     private List<HomeModel> dataList;
-    private List<FoodModel> foodModels;
-    Context mContext;
     View viewku;
 
-    public FoodAdapter(Context mContext, List<HomeModel> dataList, ArrayList<FoodModel> foodModels) {
-        this.mContext = mContext;
+    public SearchAdapter(List<HomeModel> dataList) {
         this.dataList = dataList;
-        this.foodModels = foodModels;
     }
 
     @NonNull
     @Override
-    public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         viewku = layoutInflater.inflate(R.layout.list_item, parent, false);
-        return new FoodViewHolder(viewku);
+        return new SearchAdapter.SearchViewHolder(viewku);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final FoodViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final SearchViewHolder holder, final int position) {
         Realm.init(holder.itemView.getContext());
         RealmConfiguration configuration = new RealmConfiguration.Builder().build();
         realm = Realm.getInstance(configuration);
         realmHelper = new RealmHelper(realm);
-        holder.txtHarga.setText(dataList.get(Integer.parseInt(foodModels.get(position).getPosition())).getHargaMakanan());
-        holder.txtNama.setText(dataList.get(Integer.parseInt(foodModels.get(position).getPosition())).getNamaMakanan());
-        holder.doubleClick = dataList.get(Integer.parseInt(foodModels.get(position).getPosition())).isDoubleClick();
+        holder.txtHarga.setText(dataList.get(position).getHargaMakanan());
+        holder.txtNama.setText(dataList.get(position).getNamaMakanan());
+        holder.doubleClick = dataList.get(position).isDoubleClick();
         holder.cardku.setVisibility(View.VISIBLE);
         if (holder.doubleClick){
             holder.ivCheck.setVisibility(View.VISIBLE);
@@ -68,11 +64,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         holder.cardku.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.doubleClick = dataList.get(Integer.parseInt(foodModels.get(position).getPosition())).isDoubleClick();
+                holder.doubleClick = dataList.get(position).isDoubleClick();
                 Log.d("TAG", "onClick: ");
                 if (!holder.doubleClick) {
                     holder.ivCheck.setVisibility(View.VISIBLE);
-                    realmHelper.updateCheck(dataList.get(Integer.parseInt(foodModels.get(position).getPosition())).getId(), true);
+                    realmHelper.updateCheck(dataList.get(position).getId(), true);
                     final Dialog d = new Dialog(holder.itemView.getContext());
                     d.setTitle("NumberPicker");
                     d.setContentView(R.layout.number_picker);
@@ -89,10 +85,10 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                                 @Override
                                 public void onClick(View v) {
 
-                                    Log.d("kosong", "onCreateView: " + Integer.parseInt(foodModels.get(position).getPosition()));
+                                    Log.d("kosong", "onCreateView: " + position);
 
                                     Toast.makeText(holder.itemView.getContext(), Integer.toString(i2), Toast.LENGTH_SHORT).show();
-                                    realmHelper.updateJumlah(dataList.get(Integer.parseInt(foodModels.get(position).getPosition())).getId(), Integer.toString(i2));
+                                    realmHelper.updateJumlah(dataList.get(position).getId(), Integer.toString(i2));
 
                                     d.dismiss();
                                 }
@@ -105,7 +101,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                         public void onClick(View v) {
                             d.dismiss();
                             holder.ivCheck.setVisibility(View.INVISIBLE);
-                            realmHelper.updateCheck(dataList.get(Integer.parseInt(foodModels.get(position).getPosition())).getId(), false);
+                            realmHelper.updateCheck(dataList.get(position).getId(), false);
                         }
                     });
                     d.show();
@@ -113,26 +109,24 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
                 }else {
                     holder.ivCheck.setVisibility(View.INVISIBLE);
-                    realmHelper.updateCheck(dataList.get(Integer.parseInt(foodModels.get(position).getPosition())).getId(), false);
+                    realmHelper.updateCheck(dataList.get(position).getId(), false);
                 }
             }
         });
-
     }
 
     @Override
     public int getItemCount() {
-        return foodModels.size();
+        return dataList.size();
     }
 
-
-    class FoodViewHolder extends RecyclerView.ViewHolder{
+    class SearchViewHolder extends RecyclerView.ViewHolder{
         private TextView txtNama, txtHarga;
         private ImageView img, ivCheck;
         boolean doubleClick;
         CardView cardku;
 
-        FoodViewHolder(View itemView) {
+        SearchViewHolder(View itemView) {
             super(itemView);
             cardku = itemView.findViewById(R.id.cardku);
             txtNama = itemView.findViewById(R.id.txtNama);

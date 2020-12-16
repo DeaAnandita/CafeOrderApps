@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cafeorderapps.Adapter.FoodAdapter;
+import com.example.cafeorderapps.Model.FoodModel;
 import com.example.cafeorderapps.Model.HomeModel;
 import com.example.cafeorderapps.R;
 
@@ -34,7 +35,8 @@ import io.realm.RealmResults;
 public class FoodFragment extends Fragment {
 
     private Realm realm;
-    private ArrayList mProdukList;
+    private List<HomeModel> mProdukList;
+    private ArrayList<FoodModel> foodModels;
     RecyclerView recyclerView;
     FoodAdapter foodAdapter;
 
@@ -57,7 +59,16 @@ public class FoodFragment extends Fragment {
 
         Log.d("TAG", "onCreateView: " + homeModels.toString());
 
-        foodAdapter = new FoodAdapter(getContext(), mProdukList);
+        foodModels = new ArrayList<>();
+        for (int i = 0; i < mProdukList.size(); i++) {
+            if (mProdukList.get(i).getJenisMakanan().equals("2")){
+                foodModels.add(new FoodModel(mProdukList.get(i).getId(), String.valueOf(i)));
+            }
+        }
+        Log.e("TAG", "onCreateView: " + foodModels.get(0).getPosition() );
+        Log.e("TAG", "onCreateView: " + mProdukList.get(Integer.parseInt(foodModels.get(0).getPosition())).getNamaMakanan() );
+
+        foodAdapter = new FoodAdapter(getContext(), mProdukList, foodModels);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(foodAdapter);

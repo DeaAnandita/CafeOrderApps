@@ -16,10 +16,13 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cafeorderapps.Model.DrinkModel;
+import com.example.cafeorderapps.Model.FoodModel;
 import com.example.cafeorderapps.Model.HomeModel;
 import com.example.cafeorderapps.R;
 import com.example.cafeorderapps.RealmHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
@@ -30,12 +33,14 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.DrinkViewHol
     RealmHelper realmHelper;
     Realm realm;
     private List<HomeModel> dataList;
+    private List<DrinkModel> drinkModels;
     Context mContext;
     View viewku;
 
-    public DrinkAdapter(Context mContext, List<HomeModel> dataList) {
+    public DrinkAdapter(Context mContext, List<HomeModel> dataList, ArrayList<DrinkModel> drinkModels) {
         this.mContext = mContext;
         this.dataList = dataList;
+        this.drinkModels = drinkModels;
     }
 
     @NonNull
@@ -52,75 +57,72 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.DrinkViewHol
         RealmConfiguration configuration = new RealmConfiguration.Builder().build();
         realm = Realm.getInstance(configuration);
         realmHelper = new RealmHelper(realm);
-        if (dataList.get(position).getJenisMakanan().equals("1")){
-            holder.txtHarga.setText(dataList.get(position).getHargaMakanan());
-            holder.txtNama.setText(dataList.get(position).getNamaMakanan());
-            holder.doubleClick = dataList.get(position).isDoubleClick();
-            holder.cardku.setVisibility(View.VISIBLE);
-            if (holder.doubleClick){
-                holder.ivCheck.setVisibility(View.VISIBLE);
-            }else {
-                holder.ivCheck.setVisibility(View.INVISIBLE);
-            }
-            holder.cardku.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    holder.doubleClick = dataList.get(position).isDoubleClick();
-                    Log.d("TAG", "onClick: ");
-                    if (!holder.doubleClick) {
-                        holder.ivCheck.setVisibility(View.VISIBLE);
-                        realmHelper.updateCheck(dataList.get(position).getId(), true);
-                        final Dialog d = new Dialog(holder.itemView.getContext());
-                        d.setTitle("NumberPicker");
-                        d.setContentView(R.layout.number_picker);
-                        final NumberPicker np = d.findViewById(R.id.numberPicker1);
-                        np.setMaxValue(50);
-                        np.setMinValue(0);
-                        np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-                            @Override
-                            public void onValueChange(NumberPicker numberPicker, final int i, final int i2) {
-
-                                Button DialogButton = d.findViewById(R.id.button);
-                                DialogButton.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-
-                                        Log.d("kosong", "onCreateView: " + position);
-
-                                        Toast.makeText(holder.itemView.getContext(), Integer.toString(i2), Toast.LENGTH_SHORT).show();
-                                        realmHelper.updateJumlah(dataList.get(position).getId(), Integer.toString(i2));
-
-                                        d.dismiss();
-                                    }
-                                });
-                            }
-                        });
-                        Button btnBack = d.findViewById(R.id.btn);
-                        btnBack.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                d.dismiss();
-                                holder.ivCheck.setVisibility(View.INVISIBLE);
-                                realmHelper.updateCheck(dataList.get(position).getId(), false);
-                            }
-                        });
-                        d.show();
-
-
-                    }else {
-                        holder.ivCheck.setVisibility(View.INVISIBLE);
-                        realmHelper.updateCheck(dataList.get(position).getId(), false);
-                    }
-                }
-            });
+        holder.txtHarga.setText(dataList.get(Integer.parseInt(drinkModels.get(position).getPosition())).getHargaMakanan());
+        holder.txtNama.setText(dataList.get(Integer.parseInt(drinkModels.get(position).getPosition())).getNamaMakanan());
+        holder.doubleClick = dataList.get(Integer.parseInt(drinkModels.get(position).getPosition())).isDoubleClick();
+        holder.cardku.setVisibility(View.VISIBLE);
+        if (holder.doubleClick){
+            holder.ivCheck.setVisibility(View.VISIBLE);
         }else {
-            holder.cardku.setVisibility(View.GONE);
+            holder.ivCheck.setVisibility(View.INVISIBLE);
         }
+        holder.cardku.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.doubleClick = dataList.get(Integer.parseInt(drinkModels.get(position).getPosition())).isDoubleClick();
+                Log.d("TAG", "onClick: ");
+                if (!holder.doubleClick) {
+                    holder.ivCheck.setVisibility(View.VISIBLE);
+                    realmHelper.updateCheck(dataList.get(Integer.parseInt(drinkModels.get(position).getPosition())).getId(), true);
+                    final Dialog d = new Dialog(holder.itemView.getContext());
+                    d.setTitle("NumberPicker");
+                    d.setContentView(R.layout.number_picker);
+                    final NumberPicker np = d.findViewById(R.id.numberPicker1);
+                    np.setMaxValue(50);
+                    np.setMinValue(0);
+                    np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                        @Override
+                        public void onValueChange(NumberPicker numberPicker, final int i, final int i2) {
+
+                            Button DialogButton = d.findViewById(R.id.button);
+                            DialogButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    Log.d("kosong", "onCreateView: " + Integer.parseInt(drinkModels.get(position).getPosition()));
+
+                                    Toast.makeText(holder.itemView.getContext(), Integer.toString(i2), Toast.LENGTH_SHORT).show();
+                                    realmHelper.updateJumlah(dataList.get(Integer.parseInt(drinkModels.get(position).getPosition())).getId(), Integer.toString(i2));
+
+                                    d.dismiss();
+                                }
+                            });
+                        }
+                    });
+                    Button btnBack = d.findViewById(R.id.btn);
+                    btnBack.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            d.dismiss();
+                            holder.ivCheck.setVisibility(View.INVISIBLE);
+                            realmHelper.updateCheck(dataList.get(Integer.parseInt(drinkModels.get(position).getPosition())).getId(), false);
+                        }
+                    });
+                    d.show();
+
+
+                }else {
+                    holder.ivCheck.setVisibility(View.INVISIBLE);
+                    realmHelper.updateCheck(dataList.get(Integer.parseInt(drinkModels.get(position).getPosition())).getId(), false);
+                }
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
-        return dataList.size();
+        return drinkModels.size();
     }
 
     class DrinkViewHolder extends RecyclerView.ViewHolder{

@@ -36,8 +36,6 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     SharedPreferences sp;
     ProgressDialog progressDialog;
-    private ArrayList mProdukList = new ArrayList<HomeModel>();
-    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +45,6 @@ public class LoginActivity extends AppCompatActivity {
         edUser = findViewById(R.id.edUsername);
         edpass = findViewById(R.id.edPassword);
         btnLogin = findViewById(R.id.btnLogin);
-
-        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
-        realm = Realm.getInstance(configuration);
 
         progressDialog = new ProgressDialog(this);
 
@@ -87,8 +82,9 @@ public class LoginActivity extends AppCompatActivity {
                                     Log.d("PAYLOAD", "onResponse: " + PAYLOAD);
                                     if (sukses) {
                                         sp.edit().putString("logged","user").apply();
-                                        mProdukList.clear();
-                                        fetchDataProdukAPI();
+                                        Intent intent = new Intent(LoginActivity.this, GetProduk.class);
+                                        startActivity(intent);
+                                        finish();
                                         progressDialog.dismiss();
                                     } else {
                                         Toast.makeText(LoginActivity.this, "gagal", Toast.LENGTH_SHORT).show();
@@ -113,60 +109,4 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void fetchDataProdukAPI() {
-
-        AndroidNetworking.get("http://192.168.6.188/apibajawa/getproduk.php")
-                .setTag("test")
-                .setPriority(Priority.LOW)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray data = response.getJSONArray("PAYLOAD");
-                            for (int i = 0; i < data.length(); i++) {
-                                HomeModel model = new HomeModel();
-                                JSONObject object = data.getJSONObject(i);
-                                model.setId(object.getString("id"));
-                                model.setKodeMakanan(object.getString("kodeMakanan"));
-                                model.setNamaMakanan(object.getString("namaMakanan"));
-                                model.setJenisMakanan(object.getString("jenisMakanan"));
-                                model.setHargaMakanan(object.getString("hargaMakanan"));
-                                model.setAvatar(object.getString("avatar"));
-                                model.setDoubleClick(false);
-                                mProdukList.add(model);
-                            }
-                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                            startActivity(intent);
-                            finish();
-                            realm.executeTransactionAsync(new Realm.Transaction() {
-                                @Override
-                                public void execute(Realm realma) {
-                                    realma.insertOrUpdate(mProdukList);
-                                }
-                            }, new Realm.Transaction.OnSuccess() {
-                                @Override
-                                public void onSuccess() {
-                                    Log.e("RBA", "Realm onSuccess: success insert");
-                                    RealmResults<HomeModel> homeModels = realm.where(HomeModel.class).findAll();
-                                    Log.d("RBA", "Realm Size From Api : " + homeModels.size());
-                                }
-                            }, new Realm.Transaction.OnError() {
-                                @Override
-                                public void onError(Throwable error) {
-                                    Log.e("RBA", "Realm onError: " + error.getLocalizedMessage());
-                                }
-                            });
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-
-                    }
-                });
-
-    }
 }

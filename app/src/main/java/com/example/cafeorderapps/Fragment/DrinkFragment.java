@@ -13,10 +13,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cafeorderapps.Adapter.DrinkAdapter;
+import com.example.cafeorderapps.Model.DrinkModel;
+import com.example.cafeorderapps.Model.FoodModel;
 import com.example.cafeorderapps.Model.HomeModel;
 import com.example.cafeorderapps.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -25,7 +28,8 @@ import io.realm.RealmResults;
 public class DrinkFragment extends Fragment {
 
     private Realm realm;
-    private ArrayList mProdukList;
+    private List<HomeModel> mProdukList;
+    private ArrayList<DrinkModel> drinkModels;
     RecyclerView recyclerView;
     DrinkAdapter drinkAdapter;
 
@@ -47,7 +51,14 @@ public class DrinkFragment extends Fragment {
 
         Log.d("TAG", "onCreateView: " + homeModels.toString());
 
-        drinkAdapter = new DrinkAdapter(getContext(), mProdukList);
+        drinkModels = new ArrayList<>();
+        for (int i = 0; i < mProdukList.size(); i++) {
+            if (mProdukList.get(i).getJenisMakanan().equals("1")){
+                drinkModels.add(new DrinkModel(mProdukList.get(i).getId(), String.valueOf(i)));
+            }
+        }
+
+        drinkAdapter = new DrinkAdapter(getContext(), mProdukList, drinkModels);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(drinkAdapter);
