@@ -29,7 +29,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.HomeViewHo
     View viewku;
     Context mContext;
 
-    public DetailAdapter(Context mContext, ArrayList<HomeModel> dataList) {
+    public DetailAdapter(Context mContext, List<HomeModel> dataList) {
         this.mContext = mContext;
         this.dataList = dataList;
     }
