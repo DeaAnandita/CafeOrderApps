@@ -16,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.cafeorderapps.BaseUrl;
 import com.example.cafeorderapps.Model.DrinkModel;
 import com.example.cafeorderapps.Model.FoodModel;
 import com.example.cafeorderapps.Model.HomeModel;
@@ -117,7 +119,7 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.DrinkViewHol
                 }
             }
         });
-
+        Glide.with(holder.itemView.getContext()).load(BaseUrl.url + dataList.get(Integer.parseInt(drinkModels.get(position).getPosition())).getAvatar()).into(holder.img);
     }
 
     @Override
