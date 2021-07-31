@@ -65,8 +65,8 @@ public class FoodFragment extends Fragment {
                 foodModels.add(new FoodModel(mProdukList.get(i).getId(), String.valueOf(i)));
             }
         }
-        Log.e("TAG", "onCreateView: " + foodModels.get(0).getPosition() );
-        Log.e("TAG", "onCreateView: " + mProdukList.get(Integer.parseInt(foodModels.get(0).getPosition())).getNamaMakanan() );
+//        Log.e("TAG", "onCreateView: " + foodModels.get(0).getPosition() );
+//        Log.e("TAG", "onCreateView: " + mProdukList.get(Integer.parseInt(foodModels.get(0).getPosition())).getNamaMakanan() );
 
         foodAdapter = new FoodAdapter(getContext(), mProdukList, foodModels);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
