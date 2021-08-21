@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="Q">
-        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".SearchActivity"/>
         <activity android:name=".GetProduk" />
         <activity android:name=".HomeActivity">
             <intent-filter>
