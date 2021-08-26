@@ -40,6 +40,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -107,34 +108,6 @@ public class CartFragment extends Fragment {
                 for (int i = 0; i < mProdukList.size(); i++) {
                     if (mProdukList.get(i).isDoubleClick()){
                         int subTotal = Integer.parseInt(mProdukList.get(i).getJumlah()) * Integer.parseInt(mProdukList.get(i).getHargaMakanan());
-                        AndroidNetworking.post(BaseUrl.url + "insertdetailnota.php")
-                                .addBodyParameter("kodeNota", "003")
-                                .addBodyParameter("kodeMakanan", mProdukList.get(i).getKodeMakanan())
-                                .addBodyParameter("jumlahItem", mProdukList.get(i).getJumlah())
-                                .addBodyParameter("subTotal", String.valueOf(subTotal))
-                                .addBodyParameter("hargaSatuan", mProdukList.get(i).getHargaMakanan())
-                                .setPriority(Priority.LOW)
-                                .build()
-                                .getAsJSONObject(new JSONObjectRequestListener() {
-                                    @Override
-                                    public void onResponse(JSONObject response) {
-                                        try {
-                                            JSONObject hasil = response.getJSONObject("hasil");
-                                            boolean sukses = hasil.getBoolean("respon");
-                                            Log.d("PAYLOAD", "onResponse: " + hasil);
-                                            if (sukses) {
-                                                Log.d("TAG", "onResponse: masuk");
-                                            }
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onError(ANError anError) {
-
-                                    }
-                                });
                         total += subTotal;
                     }
                 }
@@ -143,9 +116,9 @@ public class CartFragment extends Fragment {
                         .addBodyParameter("tanggalNota", formattedDate)
                         .addBodyParameter("nohpCustomer", "085")
                         .addBodyParameter("note", edNote.getText().toString())
-                        .addBodyParameter("kodeNota", "003")
+                        .addBodyParameter("kodeNota", "-")
                         .addBodyParameter("totalHarga", String.valueOf(total))
-                        .addBodyParameter("statusOrder", "orderDiterima")
+                        .addBodyParameter("statusOrder", "Tunggu")
                         .setPriority(Priority.LOW)
                         .build()
                         .getAsJSONObject(new JSONObjectRequestListener() {
@@ -154,11 +127,45 @@ public class CartFragment extends Fragment {
                                 try {
                                     JSONObject hasil = response.getJSONObject("hasil");
                                     boolean sukses = hasil.getBoolean("respon");
+                                    String id = hasil.getString("id");
                                     Log.d("PAYLOAD", "onResponse: " + hasil);
                                     if (sukses) {
                                         Log.d("TAG", "onResponse: masuk");
                                         for (int i = 0; i < mProdukList.size(); i++) {
                                             realmHelper.updateCheck(mProdukList.get(i).getId(), false);
+
+                                            if (mProdukList.get(i).isDoubleClick()){
+                                                int subTotal = Integer.parseInt(mProdukList.get(i).getJumlah()) * Integer.parseInt(mProdukList.get(i).getHargaMakanan());
+                                                AndroidNetworking.post(BaseUrl.url + "insertdetailnota.php")
+                                                        .addBodyParameter("kodeNota", id)
+                                                        .addBodyParameter("kodeMakanan", mProdukList.get(i).getKodeMakanan())
+                                                        .addBodyParameter("jumlahItem", mProdukList.get(i).getJumlah())
+                                                        .addBodyParameter("subTotal", String.valueOf(subTotal))
+                                                        .addBodyParameter("hargaSatuan", mProdukList.get(i).getHargaMakanan())
+                                                        .setPriority(Priority.LOW)
+                                                        .build()
+                                                        .getAsJSONObject(new JSONObjectRequestListener() {
+                                                            @Override
+                                                            public void onResponse(JSONObject response) {
+                                                                try {
+                                                                    JSONObject hasil = response.getJSONObject("hasil");
+                                                                    boolean sukses = hasil.getBoolean("respon");
+                                                                    Log.d("PAYLOAD", "onResponse: " + hasil);
+                                                                    if (sukses) {
+                                                                        Log.d("TAG", "onResponse: masuk");
+                                                                    }
+                                                                } catch (JSONException e) {
+                                                                    e.printStackTrace();
+                                                                }
+                                                            }
+
+                                                            @Override
+                                                            public void onError(ANError anError) {
+
+                                                            }
+                                                        });
+                                            }
+
                                             Intent intent = new Intent(view.getContext(), HomeActivity.class);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                             startActivity(intent);
