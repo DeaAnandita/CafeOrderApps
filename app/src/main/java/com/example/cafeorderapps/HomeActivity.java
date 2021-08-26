@@ -81,6 +81,9 @@ public class HomeActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.search){
             Intent intent = new Intent(this, SearchActivity.class);
             startActivity(intent);
+        } else if (item.getItemId() == R.id.down) {
+            Intent intent = new Intent(this, GetProduk.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

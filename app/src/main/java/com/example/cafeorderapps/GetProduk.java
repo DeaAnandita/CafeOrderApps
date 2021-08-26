@@ -77,6 +77,7 @@ public class GetProduk extends AppCompatActivity {
                                     realm.executeTransactionAsync(new Realm.Transaction() {
                                         @Override
                                         public void execute(Realm realma) {
+                                            realma.deleteAll();
                                             realma.insertOrUpdate(mProdukList);
                                         }
                                     }, new Realm.Transaction.OnSuccess() {
